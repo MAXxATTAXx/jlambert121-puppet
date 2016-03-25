@@ -36,15 +36,28 @@ class puppet::params {
   $server_ssl_crl_path = undef
 
 
-  case $::osfamily {
-    'Debian': {
-      $server_config_dir = '/etc/default'
+  case $::kernel {
+    'Windows': {
+      $server_config_dir = undef
+      $conf_dir = 'C:/ProgramData/PuppetLabs/puppet/etc'
     }
-    'RedHat': {
-      $server_config_dir = '/etc/sysconfig'
+    'Linux': {
+      $conf_dir = '/etc/puppetlabs/puppet'
+
+      case $::osfamily {
+        'Debian': {
+          $server_config_dir = '/etc/default'
+        }
+        'RedHat': {
+          $server_config_dir = '/etc/sysconfig'
+        }
+        default: {
+          fail("${::osfamily} is not supported.")
+        }
+      }
     }
     default: {
-      fail("${::osfamily} is not supported.")
+      fail("${::kernel} kernel is not supported")
     }
   }
 }

@@ -11,34 +11,25 @@ class puppet::agent::service (
 
   case $runmode {
     'cron': {
-      cron { 'puppet':
-        ensure  => 'present',
-        user    => 'root',
-        command => '/opt/puppetlabs/bin/puppet agent --onetime --no-daemonize',
-        hour    => '*',
-        minute  =>  [ fqdn_rand(30), fqdn_rand(30) + 30 ],
-      }
-
+      class { '::puppet::agent::job_resource': }
       service { 'puppet':
         ensure => 'stopped',
         enable => false,
       }
     }
     'service': {
-      cron { 'puppet':
-        ensure => 'absent',
+      class { '::puppet::agent::job_resource':
+        job_ensure => 'absent',
       }
-
       service { 'puppet':
         ensure => 'running',
         enable => true,
       }
     }
     'none': {
-      cron { 'puppet':
-        ensure => 'absent',
+      class { '::puppet::agent::job_resource':
+        job_ensure => 'absent',
       }
-
       service { 'puppet':
         ensure => 'stopped',
         enable => false,
