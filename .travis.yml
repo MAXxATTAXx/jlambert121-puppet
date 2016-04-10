@@ -10,12 +10,5 @@ matrix:
   - rvm: 2.1.0
     env: PUPPET_GEM_VERSION="~> 4.2" 
 notifications:
-  email: false
-  hipchat:
-    rooms:
-      - secure: iSPprJS+t7TDKKHdvr2pRcMe51IlYvjOz+BzC2Ih3R9gkLFHjqLgCemGAi6Ab1URjRuhe8rb0RK1gDb0DHlrWMp0PVQTJyKH+67saK3eWZC59fKW1eJtjHgiMNYzmmi+Yq0zOhUnLILU/D77KvImn5T0bWp2L6OW0XXxoJOTEj4=
-    template:
-      - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
-    format: html
-  on_success: always
-  on_failure: always
+  email:
+    - julioguevara150@gmail.com
