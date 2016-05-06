@@ -23,6 +23,8 @@ class puppet::server::config (
   $server_ssl_ca_cert    = $::puppet::server_ssl_ca_cert,
   $server_ssl_cert_chain = $::puppet::server_ssl_cert_chain,
   $server_ssl_crl_path   = $::puppet::server_ssl_crl_path,
+  $enc                   = $::puppet::enc,
+  $external_nodes        = $::puppet::external_nodes,
 ) {
 
   $file_ensure = $server ? {
@@ -46,6 +48,8 @@ class puppet::server::config (
     # - $ca_enabled
     # - $puppetdb
     # - $reports
+    # - $enc
+    # - $external_nodes
     concat::fragment { 'puppet_master':
       target  => '/etc/puppetlabs/puppet/puppet.conf',
       content => template("${module_name}/puppet.master.erb"),
