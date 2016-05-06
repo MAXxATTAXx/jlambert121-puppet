@@ -34,7 +34,8 @@ class puppet::params {
   $server_ssl_ca_cert = undef
   $server_ssl_cert_chain = undef
   $server_ssl_crl_path = undef
-
+  $enc = false
+  $external_nodes = '/etc/puppetlabs/puppet/node.rb'
 
   case $::kernel {
     'Windows': {

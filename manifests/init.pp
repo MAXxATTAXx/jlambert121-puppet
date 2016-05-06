@@ -37,6 +37,8 @@ class puppet (
   Optional[String]                             $server_ssl_ca_cert    = $::puppet::params::server_ssl_ca_cert,
   Optional[String]                             $server_ssl_cert_chain = $::puppet::params::server_ssl_cert_chain,
   Optional[String]                             $server_ssl_crl_path   = $::puppet::params::server_ssl_crl_path,
+  Boolean                                      $enc                   = $::puppet::params::enc,
+  String                                       $external_nodes        = $::puppet::params::external_nodes,
 ) inherits puppet::params {
 
   if $puppetdb and !$puppetdb_server {

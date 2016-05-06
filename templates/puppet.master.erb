@@ -15,3 +15,7 @@
   storeconfigs = true
   storeconfigs_backend = puppetdb
 <% end -%>
+<% if @enc -%>
+  node_terminus = exec
+  external_nodes = <%= @external_nodes %>
+<% end -%>
